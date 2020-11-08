@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:weightSum="10"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Customer.DetailCustomerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#0099ff"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <ImageView
+            android:padding="10dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_backarrow"
+            android:id="@+id/imgback"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center"
+            android:text="Update Movie"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:scaleType="fitCenter"
+            android:id="@+id/imgmovie"
+            android:src="@drawable/ic_customer_home"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="200dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="ID: "
+                android:textColor="#f20" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_weight="8"
+                android:id="@+id/txtid"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Tên khach hang: "
+                android:textColor="#f20" />
+
+           <TextView
+               android:gravity="center_vertical"
+               android:layout_weight="8"
+               android:id="@+id/txtnamecustomer"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Email: "
+                android:textColor="#f20" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_weight="8"
+                android:id="@+id/txtemail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Ngay Sinh: "
+                android:textColor="#f20" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_weight="8"
+                android:id="@+id/txtngaysinh"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="SDT: "
+                android:textColor="#f20" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_weight="8"
+                android:id="@+id/txtsdt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+        
+    </LinearLayout>
+
+
+</LinearLayout>
