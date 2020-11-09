@@ -16,8 +16,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:scaleType="center"
-                android:src="@drawable/ic_movie"
+                android:src="@drawable/ic_two_tickets"
                 android:layout_weight="3"
                 android:id="@+id/imgmovie"
                 android:layout_width="0dp"
@@ -33,16 +32,30 @@
                 <TextView
                     android:textStyle="bold"
                     android:textColor="#000000"
-                    android:text="Tên phim"
+                    android:text="ID ve"
                     android:textSize="25sp"
-                    android:id="@+id/txtmoviename"
+                    android:id="@+id/txtIDticker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:textSize="20dp"
-                    android:text="min"
-                    android:id="@+id/txtthoigian"
+                    android:text="Phim"
+                    android:id="@+id/txtphim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textSize="20dp"
+                    android:text="gia ve"
+                    android:id="@+id/txtgiave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textSize="20dp"
+                    android:text="Ten nguoi dat"
+                    android:id="@+id/txttennguoidat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

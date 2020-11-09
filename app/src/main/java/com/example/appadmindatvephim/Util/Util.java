@@ -8,5 +8,7 @@ public class Util {
     public static final String LINK_DELETEMOVIE = "http://192.168.1.7:3000/deletemovieadmin";
     public static final String LINK_LOADTHELOAI = "http://192.168.1.7:3000/loadloaiphimadmin";
     public static final String LINK_LOADDATACUSTOMER = "http://192.168.1.7:3000/loadcustomeradmin";
-    public static  final  String LINK_LOADDATACINEMA = "http://192.168.1.7:3000/loadcinemaadmin";
+    public static final String LINK_LOADDATACINEMA = "http://192.168.1.7:3000/loadcinemaadmin";
+    public static final String LINK_LOADVEDAT = "http://192.168.1.7:3000/loadtickeradmin";
+
 }

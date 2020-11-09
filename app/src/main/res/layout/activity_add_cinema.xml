@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:weightSum="10"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".Activity.Customer.DetailCustomerActivity">
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".Activity.Cinema.AddCinemaActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:layout_weight="9"
             android:gravity="center"
-            android:text="Detail Customer"
+            android:text="Add Cinema"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -45,12 +45,10 @@
         android:padding="10dp">
 
         <ImageView
-            android:scaleType="fitCenter"
-            android:id="@+id/imgmovie"
-            android:src="@drawable/ic_customer_home"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="150dp"
-            android:layout_height="200dp"/>
+            android:layout_gravity="center"
+            android:src="@drawable/ic_cinema"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,15 +61,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="ID: "
+                android:text="Tên rap: "
                 android:textColor="#f20" />
 
-            <TextView
-                android:gravity="center_vertical"
+            <EditText
+                android:id="@+id/edtnamemovie"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:id="@+id/txtid"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:hint="Enter your name movie" />
 
         </LinearLayout>
 
@@ -86,63 +84,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="Tên khach hang: "
+                android:text="Hinh rap: "
                 android:textColor="#f20" />
 
-           <TextView
-               android:gravity="center_vertical"
-               android:layout_weight="8"
-               android:id="@+id/txtnamecustomer"
-               android:layout_width="0dp"
-               android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
+            <EditText
+                android:id="@+id/edtimgphim"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="Email: "
-                android:textColor="#f20" />
-
-            <TextView
-                android:gravity="center_vertical"
                 android:layout_weight="8"
-                android:id="@+id/txtemail"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="Ngay Sinh: "
-                android:textColor="#f20" />
-
-            <TextView
-                android:gravity="center_vertical"
-                android:layout_weight="8"
-                android:id="@+id/txtngaysinh"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:hint="Enter your link imgae movie" />
 
         </LinearLayout>
 
@@ -157,19 +107,34 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="SDT: "
+                android:text="Dia chi: "
                 android:textColor="#f20" />
 
-            <TextView
-                android:gravity="center_vertical"
-                android:layout_weight="8"
-                android:id="@+id/txtsdt"
+            <EditText
+                android:id="@+id/edtdiachi"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:hint="Enter your link imgae movie" />
 
         </LinearLayout>
-        
+
+
+
+
+        <Button
+            android:id="@+id/btnnext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/background_btnlogin"
+            android:text="Them Cinema"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
     </LinearLayout>
-
 
 </LinearLayout>

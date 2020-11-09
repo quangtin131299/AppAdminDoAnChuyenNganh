@@ -2,6 +2,7 @@ package com.example.appadmindatvephim.Activity.Cinema;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +18,7 @@ import com.example.appadmindatvephim.Adapter.CinemaAdapter;
 import com.example.appadmindatvephim.DTO.Cinema;
 import com.example.appadmindatvephim.R;
 import com.example.appadmindatvephim.Util.Util;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +30,7 @@ public class CinemaActivity extends AppCompatActivity {
     ArrayList<Cinema> cinemas;
     CinemaAdapter cinemaAdapter;
     ListView lvcinema;
+    FloatingActionButton fabadd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,20 @@ public class CinemaActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+        fabadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CinemaActivity.this, AddCinemaActivity.class);
+                startActivity(i);
+            }
+        });
         lvcinema.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Cinema cinema = cinemas.get(position);
+                Intent i = new Intent(CinemaActivity.this, UpdateActivity.class);
+                i.putExtra("CINEMA", cinema);
+                startActivity(i);
             }
         });
     }
@@ -80,6 +93,7 @@ public class CinemaActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        fabadd = findViewById(R.id.fabadd);
         cinemas = new ArrayList<>();
         cinemaAdapter = new CinemaAdapter(CinemaActivity.this, cinemas);
         lvcinema = findViewById(R.id.lvcinema);

@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import com.example.appadmindatvephim.Activity.Cinema.CinemaActivity;
 import com.example.appadmindatvephim.Activity.Customer.CustomerActivity;
 import com.example.appadmindatvephim.Activity.Movie.MovieActivity;
+import com.example.appadmindatvephim.Activity.Ticker.TickerActivity;
 import com.example.appadmindatvephim.R;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +21,7 @@ import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity {
 
-    CardView cardmovie, cardcustomer, cardcinema;
+    CardView cardmovie, cardcustomer, cardcinema,cardticker;
     TextView txttime, txtdate;
     SimpleDateFormat timeformat, dateFormat;
 
@@ -36,6 +37,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+        cardticker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, TickerActivity.class);
+                startActivity(i);
+            }
+        });
         cardcinema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        cardticker = findViewById(R.id.cardticker);
         cardcustomer = findViewById(R.id.cardcustomer);
         cardmovie = findViewById(R.id.cardmovie);
         timeformat = new SimpleDateFormat("HH:mm:ss");

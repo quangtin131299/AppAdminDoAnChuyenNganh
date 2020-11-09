@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:layout_weight="9"
             android:gravity="center"
-            android:text="Detail Customer"
+            android:text="Detail Ticker"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -46,8 +46,7 @@
 
         <ImageView
             android:scaleType="fitCenter"
-            android:id="@+id/imgmovie"
-            android:src="@drawable/ic_customer_home"
+            android:src="@drawable/ic_two_tickets"
             android:layout_gravity="center_horizontal"
             android:layout_width="150dp"
             android:layout_height="200dp"/>
@@ -69,7 +68,7 @@
             <TextView
                 android:gravity="center_vertical"
                 android:layout_weight="8"
-                android:id="@+id/txtid"
+                android:id="@+id/txtidticker"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
 
@@ -89,12 +88,12 @@
                 android:text="Tên khach hang: "
                 android:textColor="#f20" />
 
-           <TextView
-               android:gravity="center_vertical"
-               android:layout_weight="8"
-               android:id="@+id/txtnamecustomer"
-               android:layout_width="0dp"
-               android:layout_height="match_parent"/>
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_weight="8"
+                android:id="@+id/txttengnguoidat"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
@@ -109,13 +108,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="Email: "
+                android:text="Ten phong: "
                 android:textColor="#f20" />
 
             <TextView
                 android:gravity="center_vertical"
                 android:layout_weight="8"
-                android:id="@+id/txtemail"
+                android:id="@+id/txttenphong"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
 
@@ -134,13 +133,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="Ngay Sinh: "
+                android:text="Ten phim: "
                 android:textColor="#f20" />
 
             <TextView
                 android:gravity="center_vertical"
                 android:layout_weight="8"
-                android:id="@+id/txtngaysinh"
+                android:id="@+id/txttenphim"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
 
@@ -157,18 +156,85 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="SDT: "
+                android:text="Suat chieu: "
                 android:textColor="#f20" />
 
             <TextView
                 android:gravity="center_vertical"
                 android:layout_weight="8"
-                android:id="@+id/txtsdt"
+                android:id="@+id/txtsuatchieu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
-        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Ten ghe: "
+                android:textColor="#f20" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_weight="8"
+                android:id="@+id/txttenghe"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Ten Rap: "
+                android:textColor="#f20" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_weight="8"
+                android:id="@+id/txttenrap"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Trang Thai: "
+                android:textColor="#f20" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_weight="8"
+                android:id="@+id/txttrangthai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
