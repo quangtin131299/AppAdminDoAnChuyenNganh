@@ -11,10 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.Ticker.DetailTickerActivity"></activity>
+        <activity android:name=".Activity.XepLich.MovieScheduleBookingActivity"></activity>
+        <activity android:name=".Activity.XepLich.AddScheduleActivity" />
+        <activity android:name=".Activity.XepLich.DetailsScheduleActivity" />
+        <activity android:name=".Activity.XepLich.ScheduleActivity" />
+        <activity android:name=".Activity.ShowTime.ShowTimeActivity" />
+        <activity android:name=".Activity.Ticker.DetailTickerActivity" />
         <activity android:name=".Activity.Ticker.TickerActivity" />
         <activity android:name=".Activity.Cinema.AddCinemaActivity" />
-        <activity android:name=".Activity.Cinema.UpdateActivity" />
+        <activity android:name=".Activity.Cinema.UpdateCinemaActivity" />
         <activity android:name=".Activity.Cinema.CinemaActivity" />
         <activity android:name=".Activity.Customer.DetailCustomerActivity" />
         <activity android:name=".Activity.Customer.CustomerActivity" />

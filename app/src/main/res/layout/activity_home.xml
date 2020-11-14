@@ -142,6 +142,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
+                    android:id="@+id/cardschedule"
                     android:layout_height="100dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="8dp">
@@ -156,7 +157,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_shecdule"
+                            android:src="@drawable/ic_shecdule_home"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent" />
 

@@ -69,7 +69,7 @@ public class MovieActivity extends AppCompatActivity {
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        deleteMovie(movie.getId());
+//                        deleteMovie(movie.getId());
                     }
                 });
                 builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -119,17 +119,17 @@ public class MovieActivity extends AppCompatActivity {
                 }).start();
             }
         });
-        txtsearch.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
+        txtsearch.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
             @Override
-            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
-
-            }
-
-            @Override
-            public void onSearchAction(String currentQuery) {
+            public void onSearchTextChanged(String oldQuery, String newQuery) {
                 movies.clear();
                 movieAdapter.notifyDataSetChanged();
-                loadDataSearch(currentQuery);
+                loadDataSearch(newQuery);
+                try {
+                    Thread.sleep(700);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -176,9 +176,9 @@ public class MovieActivity extends AppCompatActivity {
                             movie.setThoigian(jsonArray.getJSONObject(i).getInt("ThoiGian"));
                             movie.setTrailerid(jsonArray.getJSONObject(i).getString("Trailer"));
                             movies.add(movie);
+                            movieAdapter.notifyDataSetChanged();
                         }
-                        Log.d("//////", String.valueOf(movies.size()));
-                        movieAdapter.notifyDataSetChanged();
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

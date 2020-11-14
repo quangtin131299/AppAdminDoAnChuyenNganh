@@ -97,4 +97,9 @@ public class Movie implements Serializable {
         this.mota = mota;
         this.ngaykhoichieu = ngaykhoichieu;
     }
+
+    @Override
+    public String toString() {
+        return this.tenmovie;
+    }
 }

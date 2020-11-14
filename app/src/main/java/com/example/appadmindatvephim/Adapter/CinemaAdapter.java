@@ -52,7 +52,9 @@ public class CinemaAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Cinema cinema = cinemas.get(position);
-        Picasso.get().load(cinema.getHinh()).into(viewHolder.imgrap);
+        if(cinema.getHinh().equals("") == false){
+            Picasso.get().load(cinema.getHinh()).into(viewHolder.imgrap);
+        }
         viewHolder.txtmoviename.setText(cinema.getTenRap());
         viewHolder.txtdiachi.setText(cinema.getDiaChi());
         return convertView;

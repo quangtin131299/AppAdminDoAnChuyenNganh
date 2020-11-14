@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".Activity.Movie.MovieActivity">
-
+    tools:context=".Activity.XepLich.ScheduleActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,9 +41,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ListView
-                android:dividerHeight="5dp"
-                android:divider="@android:color/transparent"
-                android:id="@+id/lvmovie"
+                android:id="@+id/lvschedule"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

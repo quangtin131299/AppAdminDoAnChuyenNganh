@@ -41,6 +41,10 @@ public class Cinema implements Serializable {
     }
 
     public Cinema() {
+        this.id = 0;
+        this.tenRap = "";
+        this.hinh = "";
+        this.diaChi = "";
     }
 
     public Cinema(int id, String tenRap, String hinh, String diaChi) {
@@ -48,5 +52,10 @@ public class Cinema implements Serializable {
         this.tenRap = tenRap;
         this.hinh = hinh;
         this.diaChi = diaChi;
+    }
+
+    @Override
+    public String toString() {
+        return this.tenRap ;
     }
 }

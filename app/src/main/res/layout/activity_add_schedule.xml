@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".Activity.Cinema.AddCinemaActivity">
+    android:orientation="vertical"
+    tools:context=".Activity.XepLich.AddScheduleActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:layout_weight="9"
             android:gravity="center"
-            android:text="Add Cinema"
+            android:text="Add Schedule"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -48,7 +48,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_cinema" />
+            android:src="@drawable/ic_schedule" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,73 +61,45 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="Tên rap: "
+                android:text="Ngay"
                 android:textColor="#f20" />
 
             <EditText
-                android:id="@+id/edtnamemovie"
+                android:id="@+id/edtngay"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="8"
-                android:hint="Enter your name movie" />
+                android:layout_weight="6"
+                android:hint="Enter your date schedule" />
+
+            <Button
+                android:layout_weight="2"
+                android:id="@+id/btnchonngay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_height="300dp">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="Hinh rap: "
-                android:textColor="#f20" />
-
-            <EditText
-                android:id="@+id/edtimgcinema"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="8"
-                android:hint="Enter your link imga cinema" />
+            <ListView
+                android:id="@+id/lvcinema"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="Dia chi: "
-                android:textColor="#f20" />
-
-            <EditText
-                android:id="@+id/edtdiachi"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="8"
-                android:hint="Enter your address cinema" />
-
-        </LinearLayout>
 
         <Button
-            android:id="@+id/btnthemrapmoi"
+            android:id="@+id/btnnext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/background_btnlogin"
-            android:text="Them Cinema"
+            android:text="Next"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />

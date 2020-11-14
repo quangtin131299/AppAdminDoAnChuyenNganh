@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.example.appadmindatvephim.Adapter.CinemaAdapter;
 import com.example.appadmindatvephim.DTO.Cinema;
 import com.example.appadmindatvephim.R;
@@ -31,6 +32,8 @@ public class CinemaActivity extends AppCompatActivity {
     CinemaAdapter cinemaAdapter;
     ListView lvcinema;
     FloatingActionButton fabadd;
+    FloatingSearchView txtsearch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +56,56 @@ public class CinemaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cinema cinema = cinemas.get(position);
-                Intent i = new Intent(CinemaActivity.this, UpdateActivity.class);
+                Intent i = new Intent(CinemaActivity.this, UpdateCinemaActivity.class);
                 i.putExtra("CINEMA", cinema);
                 startActivity(i);
             }
         });
+        txtsearch.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, String newQuery) {
+                cinemas.clear();
+                cinemaAdapter.notifyDataSetChanged();
+                searchCinema(newQuery);
+                try {
+                    Thread.sleep(600);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void searchCinema(String newQuery) {
+        RequestQueue requestQueue = Volley.newRequestQueue(CinemaActivity.this);
+        String url = String.format(Util.LINK_SEARCHCINEMA, newQuery);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONArray jsonArray = null;
+                try {
+                    jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        Cinema cinema = new Cinema();
+                        cinema.setiD(jsonArray.getJSONObject(i).getInt("ID"));
+                        cinema.setTenRap(jsonArray.getJSONObject(i).getString("TenRap"));
+                        cinema.setHinh(jsonArray.getJSONObject(i).getString("Hinh"));
+                        cinema.setDiaChi(jsonArray.getJSONObject(i).getString("DiaChi"));
+                        cinemas.add(cinema);
+                    }
+                    cinemaAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(stringRequest);
     }
 
     private void loadDataCinema() {
@@ -98,6 +146,7 @@ public class CinemaActivity extends AppCompatActivity {
         cinemaAdapter = new CinemaAdapter(CinemaActivity.this, cinemas);
         lvcinema = findViewById(R.id.lvcinema);
         lvcinema.setAdapter(cinemaAdapter);
+        txtsearch = findViewById(R.id.txtsearch);
 
     }
 }

@@ -42,6 +42,8 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ListView
+                android:dividerHeight="5dp"
+                android:divider="@android:color/transparent"
                 android:id="@+id/lvcinema"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
