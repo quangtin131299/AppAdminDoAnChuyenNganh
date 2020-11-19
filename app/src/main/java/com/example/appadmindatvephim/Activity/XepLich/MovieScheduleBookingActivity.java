@@ -4,16 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,9 +35,13 @@ import com.example.appadmindatvephim.Util.Util;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MovieScheduleBookingActivity extends AppCompatActivity {
 
@@ -69,17 +78,40 @@ public class MovieScheduleBookingActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+        lvphong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Room room = rooms.get(position);
+                if (room != null) {
+                    scheduleBooking.setIdphong(room.getId());
+                }
+            }
+        });
+        lvphim.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Movie movie = movies.get(position);
+                if (movie != null) {
+                    scheduleBooking.setIdphim(movie.getId());
+                }
+            }
+        });
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(scheduleBooking != null){
+                if (scheduleBooking != null) {
                     String ngay = scheduleBooking.getNgay();
                     String gio = scheduleBooking.getGio();
                     int idrap = scheduleBooking.getIdrap();
                     int idphong = scheduleBooking.getIdphong();
                     int idphim = scheduleBooking.getIdphim();
-                    if(ngay.equals("") == false && gio.equals("") == false  && idrap != 0 && idphong != 0 && idphim != 0){
-                        processScheduleBooking(ngay,gio, idrap,idphong, idphim);
+                    if (ngay.equals("") == false && gio.equals("") == false && idrap != 0 && idphong != 0 && idphim != 0) {
+                        processScheduleBooking(ngay, gio, idrap, idphong, idphim);
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MovieScheduleBookingActivity.this);
+                        builder.setTitle("Thông Báo !");
+                        builder.setMessage("Thông tin bị thiếu!");
+                        builder.show();
                     }
                 }
 
@@ -93,7 +125,38 @@ public class MovieScheduleBookingActivity extends AppCompatActivity {
         });
     }
 
-    private void processScheduleBooking(String ngay, String gio, int idrap, int idphong, int idphim) {
+    private void processScheduleBooking(final String ngay, final String gio, final int idrap, final int idphong, final int idphim) {
+        RequestQueue requestQueue = Volley.newRequestQueue(MovieScheduleBookingActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Util.LINK_XEPLICH, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response != null) {
+                    Log.d("////", response);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MovieScheduleBookingActivity.this);
+                    builder.setTitle("Thông Báo !");
+                    builder.setMessage("Xếp lịch thành công !");
+                    builder.show();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("//////", error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> maps = new HashMap<>();
+                maps.put("idrapphim", String.valueOf(idrap));
+                maps.put("ngay", ngay);
+                maps.put("gio", gio);
+                maps.put("idphong", String.valueOf(idphong));
+                maps.put("idphim", String.valueOf(idphim));
+                return maps;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));        requestQueue.add(stringRequest);
 
     }
 
@@ -102,11 +165,12 @@ public class MovieScheduleBookingActivity extends AppCompatActivity {
         TimePickerDialog timePickerDialog = new TimePickerDialog(MovieScheduleBookingActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                if (hourOfDay >= calendar.get(Calendar.HOUR_OF_DAY) && minute >= calendar.get(Calendar.MINUTE)) {
+                if (hourOfDay >= calendar.get(Calendar.HOUR_OF_DAY)) {
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     calendar.set(Calendar.MINUTE, minute);
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
                     edtnamemovie.setText(simpleDateFormat.format(calendar.getTime()));
+                    scheduleBooking.setGio(formatTime(simpleDateFormat.format(calendar.getTime())));
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MovieScheduleBookingActivity.this);
                     builder.setTitle("Thông báo !");
@@ -198,6 +262,18 @@ public class MovieScheduleBookingActivity extends AppCompatActivity {
         lvphong.setAdapter(phongadapter);
         lvphim.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         lvphong.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+    }
+
+    private String formatTime(String time) {
+        SimpleDateFormat inputtime = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat ouputtime = new SimpleDateFormat("HH:mm:ss");
+        try {
+            Date temp = inputtime.parse(time);
+            return ouputtime.format(temp);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 

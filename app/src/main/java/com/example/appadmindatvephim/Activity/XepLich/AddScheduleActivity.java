@@ -85,6 +85,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
             }
         });
+
         requestQueue.add(stringRequest);
     }
 
@@ -93,7 +94,7 @@ public class AddScheduleActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cinema cinema = cinemas.get(position);
-                if(cinema != null){
+                if (cinema != null) {
                     scheduleBooking.setIdrap(cinema.getiD());
                 }
             }
@@ -101,13 +102,11 @@ public class AddScheduleActivity extends AppCompatActivity {
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edtngay.getText().toString().equals("") == false && scheduleBooking.getIdrap() == 0) {
+                if (edtngay.getText().toString().equals("") == false && scheduleBooking.getIdrap() != 0) {
                     Intent i = new Intent(AddScheduleActivity.this, MovieScheduleBookingActivity.class);
-
                     i.putExtra("DATABOOKING", scheduleBooking);
-                    Log.d("////////////", scheduleBooking.getNgay());
                     startActivity(i);
-                }else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddScheduleActivity.this);
                     builder.setTitle("Thông báo !");
                     builder.setMessage("Bạn cần chọn đủ thông tin !");
@@ -133,10 +132,9 @@ public class AddScheduleActivity extends AppCompatActivity {
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, month);
                     calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     edtngay.setText(simpleDateFormat.format(calendar.getTime()));
-                    scheduleBooking.setNgay(simpleDateFormat.format(calendar.getTime()));
+                    scheduleBooking.setNgay(formatDate(simpleDateFormat.format(calendar.getTime())));
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddScheduleActivity.this);
                     builder.setTitle("Thông Báo !");
@@ -160,7 +158,7 @@ public class AddScheduleActivity extends AppCompatActivity {
         lvcinema.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
     }
 
-    public String formatDate(String date){
+    public String formatDate(String date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat ouput = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -169,7 +167,7 @@ public class AddScheduleActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return  "";
+        return "";
 
     }
 }

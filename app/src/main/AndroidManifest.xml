@@ -15,7 +15,6 @@
         <activity android:name=".Activity.XepLich.AddScheduleActivity" />
         <activity android:name=".Activity.XepLich.DetailsScheduleActivity" />
         <activity android:name=".Activity.XepLich.ScheduleActivity" />
-        <activity android:name=".Activity.ShowTime.ShowTimeActivity" />
         <activity android:name=".Activity.Ticker.DetailTickerActivity" />
         <activity android:name=".Activity.Ticker.TickerActivity" />
         <activity android:name=".Activity.Cinema.AddCinemaActivity" />
@@ -27,13 +26,15 @@
         <activity android:name=".Activity.Movie.UpdateMovieActivity" />
         <activity android:name=".Activity.Movie.AddMovieActivity" />
         <activity android:name=".Activity.Movie.MovieActivity" />
-        <activity android:name=".Activity.Login.LoginActivity" />
-        <activity android:name=".Activity.Home.HomeActivity">
+        <activity android:name=".Activity.Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Activity.Home.HomeActivity">
+
         </activity>
     </application>
 
