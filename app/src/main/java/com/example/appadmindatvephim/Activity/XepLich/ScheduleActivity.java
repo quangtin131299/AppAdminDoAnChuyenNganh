@@ -5,8 +5,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.ListView;
@@ -42,6 +44,9 @@ public class ScheduleActivity extends AppCompatActivity {
     FloatingSearchView txtsearch;
     FloatingActionButton fabadd;
     SwipeRefreshLayout swipeRefreshLayout;
+    View footerview;
+    volatile int vitri = 0;
+    volatile boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +57,10 @@ public class ScheduleActivity extends AppCompatActivity {
         loadSchedule();
     }
 
-
-
     private void loadSchedule() {
         RequestQueue requestQueue = Volley.newRequestQueue(ScheduleActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.LINK_LOADSCHEDULE, new Response.Listener<String>() {
+        String url = String.format(Util.LINK_LOADSCHEDULE, vitri);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response != null){
@@ -83,12 +87,26 @@ public class ScheduleActivity extends AppCompatActivity {
 
             }
         });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
 
 
     }
 
     private void addEvents() {
+        lvschedule.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(totalItemCount != 0 && firstVisibleItem + visibleItemCount == totalItemCount && isLoading == false){
+                    new LazyLoad().execute();
+                }
+            }
+        });
         lvschedule.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -183,6 +201,7 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        footerview = getLayoutInflater().inflate(R.layout.footer_listview, null);
         schedules = new ArrayList<>();
         scheduleAdapter = new ScheduleAdapter(ScheduleActivity.this, schedules);
         lvschedule = findViewById(R.id.lvschedule);
@@ -191,5 +210,35 @@ public class ScheduleActivity extends AppCompatActivity {
         fabadd = findViewById(R.id.fabadd);
         swipeRefreshLayout = findViewById(R.id.refeshlayoutlv);
 
+    }
+
+    public class LazyLoad extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    lvschedule.addFooterView(footerview);
+                }
+            });
+            vitri += 5;
+            isLoading = true;
+            loadSchedule();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            isLoading = false;
+            lvschedule.removeFooterView(footerview);
+            scheduleAdapter.notifyDataSetChanged();
+        }
     }
 }

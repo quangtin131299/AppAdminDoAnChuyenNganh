@@ -8,9 +8,11 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -43,10 +45,12 @@ public class MovieActivity extends AppCompatActivity {
     MovieAdapter movieAdapter;
     ArrayList<Movie> movies;
     ListView lvmovie;
-    int index = 0;
     FloatingActionButton fabadd;
     FloatingSearchView txtsearch;
     SwipeRefreshLayout refeshlayoutlv;
+    View footerview;
+    volatile boolean isLoading = false;
+    volatile int vitriload = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +60,26 @@ public class MovieActivity extends AppCompatActivity {
         addEvents();
         loadDataMovie();
 
+
+
     }
 
     private void addEvents() {
+        lvmovie.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+               //thêm điều kiện totalitemcount != 0 để chắc chắn gằng khi scroll  sẽ chạy event này
+
+                if (totalItemCount != 0 && visibleItemCount + firstVisibleItem == totalItemCount && isLoading == false) {
+                    new LazyLoad().execute();
+                }
+            }
+        });
         lvmovie.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -103,20 +124,12 @@ public class MovieActivity extends AppCompatActivity {
         refeshlayoutlv.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                vitriload = 0;
                 movies.clear();
                 movieAdapter.notifyDataSetChanged();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadDataMovie();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                refeshlayoutlv.setRefreshing(false);
-                            }
-                        });
-                    }
-                }).start();
+                loadDataMovie();
+
+                refeshlayoutlv.setRefreshing(false);
             }
         });
         txtsearch.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
@@ -195,7 +208,7 @@ public class MovieActivity extends AppCompatActivity {
 
     private void loadDataMovie() {
         RequestQueue requestQueue = Volley.newRequestQueue(MovieActivity.this);
-        String url = String.format(Util.LINK_LOADMOVIE, index);
+        String url = String.format(Util.LINK_LOADMOVIE, vitriload);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -215,6 +228,7 @@ public class MovieActivity extends AppCompatActivity {
                             movies.add(movie);
                         }
                         movieAdapter.notifyDataSetChanged();
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -225,11 +239,12 @@ public class MovieActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
             }
         });
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
 
     private void addControls() {
+        footerview = getLayoutInflater().inflate(R.layout.footer_listview, null);
         txtsearch = findViewById(R.id.txtsearch);
         movies = new ArrayList<>();
         movieAdapter = new MovieAdapter(MovieActivity.this, movies);
@@ -237,7 +252,38 @@ public class MovieActivity extends AppCompatActivity {
         lvmovie.setAdapter(movieAdapter);
         fabadd = findViewById(R.id.fabadd);
         refeshlayoutlv = findViewById(R.id.refeshlayoutlv);
+    }
 
+    public class LazyLoad extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    lvmovie.addFooterView(footerview);
+                }
+            });
+            vitriload += 5;
+            isLoading = true;
+            loadDataMovie();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            isLoading = false;
+            lvmovie.removeFooterView(footerview);
+            movieAdapter.notifyDataSetChanged();
+
+        }
     }
 
 }
+

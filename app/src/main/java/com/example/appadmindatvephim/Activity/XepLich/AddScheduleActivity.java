@@ -58,7 +58,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
     private void loadDataCinema() {
         RequestQueue requestQueue = Volley.newRequestQueue(AddScheduleActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.LINK_LOADDATACINEMA, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.LINK_LOADCINEMASCHEDULE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null) {

@@ -184,7 +184,7 @@ public class MovieScheduleBookingActivity extends AppCompatActivity {
 
     private void loadDataMovie() {
         RequestQueue requestQueue = Volley.newRequestQueue(MovieScheduleBookingActivity.this);
-        String url = String.format(Util.LINK_LOADMOVIE, 0);
+        String url = String.format(Util.LINK_LOADMOVIESCHEDULE);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -199,8 +199,8 @@ public class MovieScheduleBookingActivity extends AppCompatActivity {
                             movie.setTrangthai(jsonArray.getJSONObject(i).getString("TrangThai"));
                             movie.setThoigian(jsonArray.getJSONObject(i).getInt("ThoiGian"));
                             movie.setTrailerid(jsonArray.getJSONObject(i).getString("Trailer"));
-                            movie.setMota(jsonArray.getJSONObject(i).getString("MoTa"));
-                            movie.setNgaykhoichieu(jsonArray.getJSONObject(i).getString("NgayKhoiChieu"));
+//                            movie.setMota(jsonArray.getJSONObject(i).getString("MoTa"));
+//                            movie.setNgaykhoichieu(jsonArray.getJSONObject(i).getString("NgayKhoiChieu"));
                             movies.add(movie);
                         }
                         phimadapter.notifyDataSetChanged();
@@ -220,7 +220,7 @@ public class MovieScheduleBookingActivity extends AppCompatActivity {
 
     private void loadDataPhong() {
         RequestQueue requestQueue = Volley.newRequestQueue(MovieScheduleBookingActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.LINK_LOADROOM, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.LINK_LOADPHONGSCHEDULE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null) {
@@ -242,9 +242,9 @@ public class MovieScheduleBookingActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
 

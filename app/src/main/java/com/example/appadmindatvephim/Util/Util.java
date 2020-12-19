@@ -6,33 +6,35 @@ import java.security.NoSuchAlgorithmException;
 
 public class Util {
     //Login
-    public static final String LINK_LOGINADIM = "http://192.168.0.122:3000/loginadmin";
+    public static final String LINK_LOGINADIM = "https://serverappdatve.herokuapp.com/loginadmin";
     //Movie
-    public static final String LINK_LOADMOVIE = "http://192.168.0.122:3000/loadphimadmin?soluong=5&vitri=%d";
-    public static final String LINK_UPDATEMOVIE = "http://192.168.0.122:3000/updatemovie";
-    public static final String LINK_SEARCHMOVIE = "http://192.168.0.122:3000/timkiemmovieadmin?tenphim=%s";
-    public static final String LINK_ADDMOVIE = "http://192.168.0.122:3000/insertnewmovieadmin";
-    public static final String LINK_DELETEMOVIE = "http://192.168.0.122:3000/deletemovieadmin";
+    public static final String LINK_LOADMOVIE = "https://serverappdatve.herokuapp.com/loadphimadmin?vitri=%d";
+    public static final String LINK_UPDATEMOVIE = "https://serverappdatve.herokuapp.com/updatemovie";
+    public static final String LINK_SEARCHMOVIE = "https://serverappdatve.herokuapp.com/timkiemmovieadmin?tenphim=%s";
+    public static final String LINK_ADDMOVIE = "https://serverappdatve.herokuapp.com/insertnewmovieadmin";
+    public static final String LINK_DELETEMOVIE = "https://serverappdatve.herokuapp.com/deletemovieadmin";
     //Type
-    public static final String LINK_LOADTHELOAI = "http://192.168.0.122:3000/loadloaiphimadmin";
+    public static final String LINK_LOADTHELOAI = "https://serverappdatve.herokuapp.com/loadloaiphimadmin";
     //Customer
-    public static final String LINK_LOADDATACUSTOMER = "http://192.168.0.122:3000/loadcustomeradmin";
-    public static final String LINK_SEARCHCUSTOMER = "http://192.168.0.122:3000/timkiemcustomer?tencustomer=%s";
+    public static final String LINK_LOADDATACUSTOMER = "https://serverappdatve.herokuapp.com/loadcustomeradmin?vitri=%d";
+    public static final String LINK_SEARCHCUSTOMER = "https://serverappdatve.herokuapp.com/timkiemcustomer?tencustomer=%s";
     //Cinema
-    public static final String LINK_LOADDATACINEMA = "http://192.168.0.122:3000/loadcinemaadmin";
-    public static final String LINK_ADDCINEMA = "http://192.168.0.122:3000/insertnewcinemaadmin";
-    public static final String LINK_UPDATECINEMA = "http://192.168.0.122:3000/updatcinemaadmin";
-    public static final String LINK_SEARCHCINEMA = "http://192.168.0.122:3000/timkiemcinemaadmin?tencinema=%s";
+    public static final String LINK_LOADDATACINEMA = "https://serverappdatve.herokuapp.com/loadcinemaadmin?vitri=%d";
+    public static final String LINK_ADDCINEMA = "https://serverappdatve.herokuapp.com/insertnewcinemaadmin";
+    public static final String LINK_UPDATECINEMA = "https://serverappdatve.herokuapp.com/updatcinemaadmin";
+    public static final String LINK_SEARCHCINEMA = "https://serverappdatve.herokuapp.com/timkiemcinemaadmin?tencinema=%s";
     //Ticker Booking
-    public static final String LINK_LOADVEDAT = "http://192.168.0.122:3000/loadtickeradmin";
+    public static final String LINK_LOADVEDAT = "https://serverappdatve.herokuapp.com/loadtickeradmin?vitri=%d";
     //Schedule
-    public static final String LINK_SEARCHSCHEDULE = "http://192.168.0.122:3000/searchscheduleadmin?ngay=%s";
-    public static final String LINK_LOADSCHEDULE = "http://192.168.0.122:3000/loadlichchieuadmin";
-    public static final String LINK_LOADDETAILSCHEDULE = "http://192.168.0.122:3000/loadchitietlichchieuadmin?idrap=%d&ngay=%s";
-    public static final String LINK_XEPLICH = "http://192.168.0.122:3000/xeplich";
+    public static final String LINK_SEARCHSCHEDULE = "https://serverappdatve.herokuapp.com/searchscheduleadmin?ngay=%s";
+    public static final String LINK_LOADSCHEDULE = "https://serverappdatve.herokuapp.com/loadlichchieuadmin?vitri=%d";
+    public static final String LINK_LOADDETAILSCHEDULE = "https://serverappdatve.herokuapp.com/loadchitietlichchieuadmin?idrap=%d&ngay=%s";
+    public static final String LINK_XEPLICH = "https://serverappdatve.herokuapp.com/xeplich";
+    public static final String LINK_LOADMOVIESCHEDULE = "https://serverappdatve.herokuapp.com/loadphimscheduleadmin";
+    public static final String LINK_LOADPHONGSCHEDULE = "https://serverappdatve.herokuapp.com/loadphongscheduleadmin";
+    public static final String LINK_LOADCINEMASCHEDULE = "https://serverappdatve.herokuapp.com/loadcinemascheduleadmin";
     //Room
-    public static final String LINK_LOADROOM = "http://192.168.1.6:3000/loadphongadmin";
-
+    public static final String LINK_LOADROOM = "https://serverappdatve.herokuapp.com/loadphongadmin";
     public static String getMd5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
